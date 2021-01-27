@@ -50,3 +50,36 @@ jobs:
           virtServerName: 'AzureVirtServer'
           # The name for the replicated environment can be used to later destroy the environment
           newEnvironmentName: 'NewFromAction'
+      - name: Execute Job
+        # You may pin to the exact commit or the version.
+        # uses: parasoft/execute-job-action@4ff52dfe0b1abb285d1e94418d9b6015bbb5f6bc
+        uses: parasoft/execute-job-action@1.0.0
+        with:
+          # CTP URL
+          ctpUrl: 'http://104.42.225.105/em'
+          # CTP Username
+          ctpUsername: 'admin'
+          # CTP Password
+          ctpPassword: 'admin'
+          # CTP Test Execution Job Name
+          ctpJob: 'StatusJob'
+          # Abort the job after timeout exceeded
+          abortOnTimeout: 'true'
+          # Timeout value in minutes
+          timeoutInMinutes: '15'
+          # Publish test execution results to DTP
+          publishReport: 'false'
+          # DTP URL
+          dtpUrl: 'http://54.149.98.67:8080'
+          # DTP Username
+          dtpUsername: 'user'
+          # DTP Password
+          dtpPassword: 'password'
+          # DTP Project Name
+          dtpProject: 'Parabank-v3'
+          # Build ID to send to DTP
+          buildId: ''
+          # Session Tag to send to DTP
+          sessionTag: ''
+          # Append the test variable set environment name to the session tag
+          appendEnvironment: 'true'
