@@ -1,0 +1,52 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Deploy Environment
+        # You may pin to the exact commit or the version.
+        # uses: parasoft/deploy-environment-action@ea4c180723d6eb7858e41fa89c2af734ddd8c8b5
+        uses: parasoft/deploy-environment-action@1.0.0
+        with:
+          # CTP URL
+          ctpUrl: 'http://104.42.225.105/em'
+          # CTP Username
+          ctpUsername: 'admin'
+          # CTP Password
+          ctpPassword: 'admin'
+          # Name of the system
+          system: 'ParaBank'
+          # Name of the environment
+          environment: 'Golden'
+          # Name of the environment instance to provision
+          instance: 'Negative'
+          # Fail action and abort on provisioning failure
+          abortOnFailure: 'true'
+          # Virtual assets in the environment will be replicated on another server
+          copyToVirtualize: 'true'
+          # The environment assets will be copied to a Virtualize server matching this name
+          virtServerName: 'AzureVirtServer'
+          # The name for the replicated environment can be used to later destroy the environment
+          newEnvironmentName: 'NewFromAction'
