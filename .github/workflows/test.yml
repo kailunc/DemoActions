@@ -96,6 +96,6 @@ jobs:
           # CTP Password
           ctpPassword: 'admin'
           # Name of the system
-          system: 'Golden'
+          system: 'ParaBank'
           # Name of the environment
           environment: 'NewFromAction-${{env.buildId}}'
