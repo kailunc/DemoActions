@@ -24,7 +24,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
+      - name: Dynamically set MY_DATE environment variable
+        run: echo "buildId=Parabank-$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Deploy Environment
         # You may pin to the exact commit or the version.
         # uses: parasoft/deploy-environment-action@ea4c180723d6eb7858e41fa89c2af734ddd8c8b5
@@ -49,7 +50,7 @@ jobs:
           # The environment assets will be copied to a Virtualize server matching this name
           virtServerName: 'AzureVirtServer'
           # The name for the replicated environment can be used to later destroy the environment
-          newEnvironmentName: 'NewFromAction'
+          newEnvironmentName: 'NewFromAction-${{env.buildId}}'
       - name: Execute Job
         # You may pin to the exact commit or the version.
         # uses: parasoft/execute-job-action@4ff52dfe0b1abb285d1e94418d9b6015bbb5f6bc
@@ -62,7 +63,7 @@ jobs:
           # CTP Password
           ctpPassword: 'admin'
           # CTP Test Execution Job Name
-          ctpJob: 'StatusJob'
+          ctpJob: 'Status Job'
           # Abort the job after timeout exceeded
           abortOnTimeout: 'true'
           # Timeout value in minutes
@@ -78,8 +79,23 @@ jobs:
           # DTP Project Name
           dtpProject: 'Parabank-v3'
           # Build ID to send to DTP
-          buildId: ''
+          buildId: '${{env.buildId}}'
           # Session Tag to send to DTP
-          sessionTag: ''
+          sessionTag: 'Github-Action-Session'
           # Append the test variable set environment name to the session tag
           appendEnvironment: 'true'
+      - name: Destroy Environment
+        # You may pin to the exact commit or the version.
+        # uses: parasoft/destroy-environment-action@d24cf544b41f8454976fb79aadf3c78352e45c4f
+        uses: parasoft/destroy-environment-action@1.0.0
+        with:
+          # CTP URL
+          ctpUrl: 'http://104.42.225.105/em'
+          # CTP Username
+          ctpUsername: 'admin'
+          # CTP Password
+          ctpPassword: 'admin'
+          # Name of the system
+          system: 'Golden'
+          # Name of the environment
+          environment: 'NewFromAction-${{env.buildId}}'
