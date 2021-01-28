@@ -117,4 +117,4 @@ jobs:
           # Used to specify server by host or name
           serverMatch: 'name'
           # Host or name of the server
-          server: 'nitrogen.parasoft.com'
+          server: 'AzureVirtServer'
