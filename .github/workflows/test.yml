@@ -28,7 +28,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: Dynamically set MY_DATE environment variable
+      - name: Set buildId based on date
         run: echo "buildId=Parabank-$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Deploy Environment
         # You may pin to the exact commit or the version.
@@ -54,7 +54,7 @@ jobs:
           # The environment assets will be copied to a Virtualize server matching this name
           virtServerName: 'AzureVirtServer'
           # The name for the replicated environment can be used to later destroy the environment
-          newEnvironmentName: 'NewFromAction-${{env.buildId}}'
+          newEnvironmentName: 'NewFromAction-${{env.buildId}}-${{env.GITHUB_RUN_NUMBER}}'
       - name: Execute Job
         # You may pin to the exact commit or the version.
         # uses: parasoft/execute-job-action@4ff52dfe0b1abb285d1e94418d9b6015bbb5f6bc
@@ -73,9 +73,9 @@ jobs:
           # Timeout value in minutes
           timeoutInMinutes: '15'
           # Publish test execution results to DTP
-          publishReport: 'false'
+          publishReport: 'true'
           # DTP URL
-          dtpUrl: 'http://54.149.98.67:8080'
+          dtpUrl: 'http://34.223.249.70:8080'
           # DTP Username
           dtpUsername: 'user'
           # DTP Password
@@ -83,7 +83,7 @@ jobs:
           # DTP Project Name
           dtpProject: 'Parabank-v3'
           # Build ID to send to DTP
-          buildId: '${{env.buildId}}'
+          buildId: '${{env.buildId}}-${{env.GITHUB_RUN_NUMBER}}'
           # Session Tag to send to DTP
           sessionTag: 'Github-Action-Session'
           # Append the test variable set environment name to the session tag
@@ -102,7 +102,7 @@ jobs:
           # Name of the system
           system: '${{env.system}}'
           # Name of the environment
-          environment: 'NewFromAction-${{env.buildId}}'
+          environment: 'NewFromAction-${{env.buildId}}-${{env.GITHUB_RUN_NUMBER}}'
       - name: Disconnect Action
         # You may pin to the exact commit or the version.
         # uses: parasoft/disconnect-server-action@c07b9be852bd7309ab6b840d77e6bd4f079cb082
