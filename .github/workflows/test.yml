@@ -15,16 +15,13 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  deploy:
     runs-on: ubuntu-latest
     env:
       ctpUrl: "http://104.42.225.105:80/em"
       ctpUsername: 'admin'
       ctpPassword: 'admin'
       system: 'ParaBank'
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -55,6 +52,14 @@ jobs:
           virtServerName: 'AzureVirtServer'
           # The name for the replicated environment can be used to later destroy the environment
           newEnvironmentName: 'NewFromAction-${{github.run_id}}-${{github.run_number}}'
+  execute:
+    runs-on: ubuntu-latest
+    env:
+      ctpUrl: "http://104.42.225.105:80/em"
+      ctpUsername: 'admin'
+      ctpPassword: 'admin'
+      system: 'ParaBank'
+    steps:          
       - name: Execute Job
         # You may pin to the exact commit or the version.
         # uses: parasoft/execute-job-action@4ff52dfe0b1abb285d1e94418d9b6015bbb5f6bc
@@ -88,6 +93,14 @@ jobs:
           sessionTag: 'GithubAction'
           # Append the test variable set environment name to the session tag
           appendEnvironment: 'true'
+  destroy:
+    runs-on: ubuntu-latest
+    env:
+      ctpUrl: "http://104.42.225.105:80/em"
+      ctpUsername: 'admin'
+      ctpPassword: 'admin'
+      system: 'ParaBank'
+    steps:
       - name: Destroy Environment
         # You may pin to the exact commit or the version.
         # uses: parasoft/destroy-environment-action@d24cf544b41f8454976fb79aadf3c78352e45c4f
