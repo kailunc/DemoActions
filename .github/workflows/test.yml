@@ -67,9 +67,9 @@ jobs:
           # CTP Password
           ctpPassword: '${{env.ctpPassword}}'
           # CTP Test Execution Job Name
-          ctpJob: 'Status Job'
+          ctpJob: 'StatusTest'
           # Abort the job after timeout exceeded
-          abortOnTimeout: 'false'
+          abortOnTimeout: 'true'
           # Timeout value in minutes
           timeoutInMinutes: '15'
           # Publish test execution results to DTP
