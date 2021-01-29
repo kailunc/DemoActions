@@ -81,7 +81,7 @@ jobs:
           # DTP Password
           dtpPassword: 'demo-user'
           # DTP Project Name
-          dtpProject: 'Parabank-v3'
+          dtpProject: 'Parabank_Master'
           # Build ID to send to DTP
           buildId: '${{env.buildId}}-${{github.run_id}}-${{github.run_number}}'
           # Session Tag to send to DTP
