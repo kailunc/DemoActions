@@ -85,9 +85,9 @@ jobs:
           # Build ID to send to DTP
           buildId: '${{env.buildId}}'
           # Session Tag to send to DTP
-          sessionTag: 'Github-Action-Session'
+          sessionTag: 'GithubAction'
           # Append the test variable set environment name to the session tag
-          appendEnvironment: 'false'
+          appendEnvironment: 'true'
       - name: Destroy Environment
         # You may pin to the exact commit or the version.
         # uses: parasoft/destroy-environment-action@d24cf544b41f8454976fb79aadf3c78352e45c4f
