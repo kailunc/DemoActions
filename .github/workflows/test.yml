@@ -102,19 +102,19 @@ jobs:
           # Name of the system
           system: '${{env.system}}'
           # Name of the environment
-          environment: 'NewFromAction-${{env.buildId}}-${{github.run_id}}-${{github.run_number}}'
-      - name: Disconnect Action
+          environment: 'NewFromAction-${{env.buildId}}-${{github.run_id}}-${{github.run_number}}#'
+      #- name: Disconnect Action
         # You may pin to the exact commit or the version.
         # uses: parasoft/disconnect-server-action@c07b9be852bd7309ab6b840d77e6bd4f079cb082
-        uses: parasoft/disconnect-server-action@1.0.0
-        with:
+        #uses: parasoft/disconnect-server-action@1.0.0
+        #with:
           # CTP URL
-          ctpUrl: '${{env.ctpUrl}}'
+          #ctpUrl: '${{env.ctpUrl}}'
           # CTP Username
-          ctpUsername: '${{env.ctpUsername}}'
+          #ctpUsername: '${{env.ctpUsername}}'
           # CTP Password
-          ctpPassword: '${{env.ctpPassword}}'
+          #ctpPassword: '${{env.ctpPassword}}'
           # Used to specify server by host or name
-          serverMatch: 'name'
+          #serverMatch: 'name'
           # Host or name of the server
-          server: 'AzureVirtServer'
+          #server: 'AzureVirtServer'
