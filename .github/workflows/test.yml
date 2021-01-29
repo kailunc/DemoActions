@@ -77,9 +77,9 @@ jobs:
           # DTP URL
           dtpUrl: 'http://34.223.249.70:8080'
           # DTP Username
-          dtpUsername: 'user'
+          dtpUsername: 'demo'
           # DTP Password
-          dtpPassword: 'password'
+          dtpPassword: 'demo-user'
           # DTP Project Name
           dtpProject: 'Parabank-v3'
           # Build ID to send to DTP
